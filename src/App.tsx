@@ -8,17 +8,39 @@ import {Menu} from "@material-ui/icons";
 
 export type FilterValuesType = "all" | "completed" | "active";
 
-type TodolistType = {
+export type TodolistType = {
     id: string
     title: string
     filter: FilterValuesType
 }
 
-type TaskStateType = {
+export type TaskStateType = {
     [key: string]: Array<TaskType>
 }
 
 function App() {
+
+    let todolistId1 = v1();
+    let todolistId2 = v1();
+
+    let [todolists, setTodolists] = useState<Array<TodolistType>>([
+        {id: todolistId1, title: "What to learn", filter: "all"},
+        {id: todolistId2, title: "What to buy", filter: "all"}
+    ]);
+
+    let [tasksObj, setTasks] = useState<TaskStateType>({
+        [todolistId1]: [
+            {id: v1(), title: "HTML & CSS", isDone: true},
+            {id: v1(), title: "JS", isDone: true},
+            {id: v1(), title: "React", isDone: false},
+            {id: v1(), title: "TS", isDone: false},
+            {id: v1(), title: "Redux", isDone: false}
+        ],
+        [todolistId2]: [
+            {id: v1(), title: "React book", isDone: false},
+            {id: v1(), title: "Milk", isDone: true},
+        ],
+    });
 
     function removeTask(id: string, todolistId: string) {
         let tasks = tasksObj[todolistId];
@@ -57,6 +79,7 @@ function App() {
         }
     }
 
+
     function changeFilter(value: FilterValuesType, todolistId: string) {
         let todolist = todolists.find(tl => tl.id === todolistId);
         if (todolist) {
@@ -79,28 +102,6 @@ function App() {
             setTodolists([...todolists]);
         }
     }
-
-    let todolistId1 = v1();
-    let todolistId2 = v1();
-
-    let [todolists, setTodolists] = useState<Array<TodolistType>>([
-        {id: todolistId1, title: "What to learn", filter: "all"},
-        {id: todolistId2, title: "What to buy", filter: "all"}
-    ]);
-
-    let [tasksObj, setTasks] = useState<TaskStateType>({
-        [todolistId1]: [
-            {id: v1(), title: "HTML & CSS", isDone: true},
-            {id: v1(), title: "JS", isDone: true},
-            {id: v1(), title: "React", isDone: false},
-            {id: v1(), title: "TS", isDone: false},
-            {id: v1(), title: "Redux", isDone: false}
-        ],
-        [todolistId2]: [
-            {id: v1(), title: "React book", isDone: false},
-            {id: v1(), title: "Milk", isDone: true},
-        ],
-    });
 
     function addTodolist(title: string) {
         const todolist: TodolistType = {
@@ -167,7 +168,7 @@ function App() {
                 </Grid>
             </Container>
         </div>
-    );
+    )
 }
 
-export default App;
+export default App
