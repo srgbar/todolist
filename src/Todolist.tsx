@@ -2,10 +2,10 @@ import React, {ChangeEvent} from "react";
 import {FilterValuesType} from "./App";
 import {AddItemForm} from "./AddItemForm";
 import {EditableSpan} from "./EditableSpan";
-import {IconButton, Button, Checkbox} from "@material-ui/core";
-import {CheckBox, Delete} from '@material-ui/icons';
+import {Button, Checkbox, IconButton} from "@material-ui/core";
+import {Delete} from '@material-ui/icons';
 
-export type TaskType = {
+export type TasksType = {
     id: string
     title: string
     isDone: boolean
@@ -14,7 +14,7 @@ export type TaskType = {
 type PropsType = {
     id: string
     title: string
-    tasks: Array<TaskType>
+    tasks: Array<TasksType>
     removeTask: (taskId: string, todolistId: string) => void
     changeFilter: (value: FilterValuesType, todolistId: string) => void
     addTask: (title: string, todolistId: string) => void
